@@ -1,12 +1,20 @@
+//
+
+// wrapper for responsive graph resize
 function makeResponsive () {
+
   var svgArea = d3.select('body').select('svg')
+
+//  clear SVG
   if (!svgArea.empty()) {
     svgArea.remove()
   }
 
+
   // Define SVG area dimensions
-  var svgWidth = 960
-  var svgHeight = 660
+  var svgWidth = 980
+  var svgHeight = 620
+
   // Define the chart's margins as an object
   var chartMargin = {
     top: 20,
@@ -18,6 +26,7 @@ function makeResponsive () {
   // Define dimensions of the chart area
   var chartWidth = svgWidth - chartMargin.left - chartMargin.right
   var chartHeight = svgHeight - chartMargin.top - chartMargin.bottom
+
   // Select body, append SVG area to it, and set the dimensions
   var svg = d3
     .select('#scatter')
@@ -44,13 +53,13 @@ function makeResponsive () {
         d3.min(healthData, d => d[xValue]) * 0.5,
         d3.max(healthData, d => d[xValue]) * 1.0
       ])
-      .range([0, chartWidth]);
+      .range([0, chartWidth])
     return xLinearScale;
   };
 
   // func to update yScale labels when clicked
   function yScale (healthData, yValue) {
-    // func to set the x axis scale of the chart
+    // func to set the y axis scale of the chart
     var yLinearScale = d3
       .scaleLinear()
       .domain([
@@ -62,21 +71,21 @@ function makeResponsive () {
   };
 
   // Func to update xAxis when axis label is clicked
-  function renderXAxes (newXScale, xAxis) {
+  function updateXAxes (newXScale, xAxis) {
     var bottomAxis = d3.axisBottom(newXScale)
     xAxis
       .transition()
-      .duration(1000)
+      .duration(1500)
       .call(bottomAxis)
     return xAxis
   }
 
   // Func to update yAxis when axis label is clicked
-  function renderYAxes (newYScale, yAxis) {
+  function updateYAxes (newYScale, yAxis) {
     var leftAxis = d3.axisLeft(newYScale)
     yAxis
       .transition()
-      .duration(1000)
+      .duration(1500)
       .call(leftAxis)
     return yAxis;
   };
@@ -91,7 +100,7 @@ function makeResponsive () {
     ) {
     circlesGroup
     .transition()
-    .duration(1000)
+    .duration(1500)
     .attr('cx', d => newXScale(d[xValue]))
     .attr('cy', d => newYScale(d[yValue]))
     return circlesGroup;
@@ -107,7 +116,7 @@ function makeResponsive () {
   ) {
     textGroup
       .transition()
-      .duration(750)
+      .duration(1500)
       .attr('x', d => newXScale(d[xValue]))
       .attr('y', d => newYScale(d[yValue]))
       .attr('text-anchor', 'middle')
@@ -125,7 +134,7 @@ function makeResponsive () {
         var xLabel = 'Income (median)'
       }
       if (yValue === 'healthcare') {
-        var yLabel = 'Low Healthcare (%)'
+        var yLabel = 'Healthcare (%)'
       } else if (yValue === 'obesity') {
         var yLabel = 'Obesity (%)'
       } else {
@@ -205,7 +214,7 @@ function makeResponsive () {
       .attr('cy', d => yLinearScale(d[yValue]))
       .attr('class', 'stateCircle')
       .attr('r', 12)
-      .attr('opacity', '0.80')
+      .attr('opacity', '0.70')
 
       //  text appended to circles
       var textGroup = chartGroup
@@ -213,13 +222,13 @@ function makeResponsive () {
         .data(healthData)
         .enter()
         .append('text')
-        .attr('x', d => xLinearScale(d[yValue]))
+        .attr('x', d => xLinearScale(d[xValue]))
         .attr('y', d => yLinearScale(d[yValue] * 0.90))
         .text(d => d.abbr)
         .attr('class', 'stateText')
         .attr('font-size', '12px')
         .attr('text-anchor', 'middle')
-        .attr('fill', 'white')
+        .attr('fill', 'grey')
     
     // Additional gp x axis labels
     var xLabelsGp = chartGroup
@@ -230,14 +239,16 @@ function makeResponsive () {
       .append('text')
       .attr('x',0)
       .attr('y',20)
+      // for event listener
       .attr('value', 'poverty')
       .classed('active', true)
-      .text('poverty (%)')
+      .text('Poverty (%)')
 
     var ageLabel = xLabelsGp
       .append('text')
       .attr('x', 0)
       .attr('y', 40)
+      // for event listenter
       .attr('value', 'age')
       .classed('inactive', true)
       .text('Age (median)')
@@ -246,14 +257,15 @@ function makeResponsive () {
       .append('text')
       .attr('x', 0)
       .attr('y', 60)
+      //
       .attr('value', 'income')
       .classed('inactive', true)
-      .text('Income Lvl (median)')     
+      .text('Income (median)')     
 
     // y axis gps
     var yLabelsGp = chartGroup
       .append('g')
-      .attr('transform', `translate(-25, ${chartHeight / 2})`)
+      .attr('transform', `translate(-20, ${chartHeight / 2})`)
 
     // Append yAxis
     var hcLabel = yLabelsGp
@@ -265,7 +277,7 @@ function makeResponsive () {
       .attr('dy', '1em')
       .classed('axis-text', true)
       .classed('active', true)
-      .text('Low Healthcare (%)')
+      .text('Healthcare (%)')
 
     var smkLabel = yLabelsGp
       .append('text')
@@ -287,7 +299,7 @@ function makeResponsive () {
       .attr('dy', '1em')
       .classed('axis-text', true)
       .classed('inactive', true)
-      .text('Obese (%)')
+      .text('Obesity (%)')
     
       // tooltip update
       var circlesGroup = updateToolTip(
@@ -303,7 +315,7 @@ function makeResponsive () {
       if (value !== xValue) {
           xValue = value
           xLinearScale = xScale(healthData, xValue)
-          xAxis = renderXAxes(xLinearScale, xAxis)
+          xAxis = updateXAxes(xLinearScale, xAxis)
 
         circlesGroup = renderCircles(
           circlesGroup,
@@ -324,7 +336,7 @@ function makeResponsive () {
         circlesGroup = updateToolTip(
           xValue,
           yValue,
-          circlesGp,
+          circlesGroup,
           textGroup
         )
         if (xValue === 'poverty') {
@@ -345,14 +357,19 @@ function makeResponsive () {
     
 
     yLabelsGp.selectAll('text').on('click', function () {
+
       var value = d3.select(this).attr('value')
+
       if (value !== yValue) {
+
         yValue = value
-        yLinearScale = yScale(healthData, xValue)
-        yAxis = renderYAxes(yLinearScale, yAxis)
+
+        yLinearScale = yScale(healthData, yValue)
+
+        yAxis = updateYAxes(yLinearScale, yAxis)
 
         circlesGroup = renderCircles(
-          textGroup,
+          circlesGroup,
           xLinearScale,
           xValue,
           yLinearScale,
@@ -390,7 +407,7 @@ function makeResponsive () {
 
       }
     })
-  });
+  })
 }
 makeResponsive()
 
