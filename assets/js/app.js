@@ -1,7 +1,7 @@
 //
 
 // wrapper for responsive graph resize
-function makeResponsive () {
+function responsiveWrapper() {
 
   var svgArea = d3.select('body').select('svg')
 
@@ -119,10 +119,9 @@ function makeResponsive () {
       .duration(1500)
       .attr('x', d => newXScale(d[xValue]))
       .attr('y', d => newYScale(d[yValue]))
-      .attr('text-anchor', 'middle')
-    
+      .attr('text-anchor', 'middle') 
     return textGroup
-  }
+  };
 
     //  Update tooltips for circle gp
     function updateToolTip (xValue, yValue, circlesGroup, textGroup) {
@@ -213,7 +212,7 @@ function makeResponsive () {
       .attr('cx', d => xLinearScale(d[xValue]))
       .attr('cy', d => yLinearScale(d[yValue]))
       .attr('class', 'stateCircle')
-      .attr('r', 12)
+      .attr('r', 12, dy = '.4em')
       .attr('opacity', '0.70')
 
       //  text appended to circles
@@ -223,7 +222,7 @@ function makeResponsive () {
         .enter()
         .append('text')
         .attr('x', d => xLinearScale(d[xValue]))
-        .attr('y', d => yLinearScale(d[yValue] * 0.90))
+        .attr('y', d => yLinearScale(d[yValue]))
         .text(d => d.abbr)
         .attr('class', 'stateText')
         .attr('font-size', '12px')
@@ -409,9 +408,9 @@ function makeResponsive () {
     })
   })
 }
-makeResponsive()
+responsiveWrapper()
 
-// When Browser Window is Resized, makeResponsive() is Called
+// call wrapper when window resized
 d3.select(window).on('resize', makeResponsive)
 
 
