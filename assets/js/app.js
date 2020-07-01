@@ -133,7 +133,7 @@ function responsiveWrapper() {
         var xLabel = 'Income (median)'
       }
       if (yValue === 'healthcare') {
-        var yLabel = 'Healthcare (%)'
+        var yLabel = 'Lacks Healthcare (%)'
       } else if (yValue === 'obesity') {
         var yLabel = 'Obesity (%)'
       } else {
@@ -212,7 +212,7 @@ function responsiveWrapper() {
       .attr('cx', d => xLinearScale(d[xValue]))
       .attr('cy', d => yLinearScale(d[yValue]))
       .attr('class', 'stateCircle')
-      .attr('r', 12, dy = '.4em')
+      .attr('r', 12)
       .attr('opacity', '0.70')
 
       //  text appended to circles
@@ -227,7 +227,9 @@ function responsiveWrapper() {
         .attr('class', 'stateText')
         .attr('font-size', '12px')
         .attr('text-anchor', 'middle')
-        .attr('fill', 'grey')
+        // .attr('fill', 'grey')
+        .attr('dy', '.3em')
+
     
     // Additional gp x axis labels
     var xLabelsGp = chartGroup
@@ -276,7 +278,7 @@ function responsiveWrapper() {
       .attr('dy', '1em')
       .classed('axis-text', true)
       .classed('active', true)
-      .text('Healthcare (%)')
+      .text('Lacks Healthcare (%)')
 
     var smkLabel = yLabelsGp
       .append('text')
