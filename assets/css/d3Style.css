@@ -12,14 +12,14 @@
 }
 
 .inactive {
-  font-weight: lighter;
-  fill: #d4c7a8;
+  font-weight: normal;
+  fill: lightslategray;
   transition: fill 0.3s ease-out;
   text-anchor: middle;
 }
 
 .inactive:hover {
-  fill: rgb(112, 107, 78);
+  fill: indianred;
   cursor: pointer;
 }
 
@@ -27,33 +27,33 @@
 .stateText {
   font-family: sans-serif;
   font-weight: bolder;
-  fill: steelblue;
+  fill: brown;
   text-anchor: middle;
 }
 
 .stateCircle {
-  fill: lightskyblue;
+  fill: steelblue;
   stroke: darkslategray;
 }
 
-.chart {
+/* .chart {
   display: block;
   margin: 0;
-}
+} */
 
 .d3-tip {
   padding: 6px;
   font-size: 12px;
   line-height: 1;
   line-height: 1.5em;
-  color: #d4c7a8;
+  color: lightsteelblue;
   text-align: center;
   text-transform: capitalize;
-  background: darkslategrey;
+  background:darkslategray;
   border-radius: 4px;
 }
 
-/* Mobile Rules */
+/* /Mobile */
 @media screen and (max-width: 530px) {
   .stateText {
     display: none;

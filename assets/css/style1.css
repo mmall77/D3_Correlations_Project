@@ -1,0 +1,134 @@
+/* .iframeContainer {
+  padding: 20px;
+  border: 1px solid #e3e3e3;
+} */
+
+/* Sticky Footer rules (https://getbootstrap.com/examples/sticky-footer/) */
+html {
+  position: relative;
+  min-height: 100%;
+}
+
+body {
+  /* Padding bottom by footer height */
+  padding-bottom: 60px;
+  background: lightslategray;
+}
+
+
+
+
+.chartarea {
+  background-color: lightsteelblue;
+  width: 90%;
+  margin: auto; 
+}
+
+/* .svg-img {
+  height: 100px;
+  margin: 20px;
+  background: lightsteelblue;
+
+} */
+
+
+.container {
+  margin: auto;
+}
+
+/* #svg-text {
+  height: .8em;
+  margin-bottom: .2em;
+  font-family: 'Arial, Helvetica, sans-serif';
+  overflow: hidden;
+  background: lightsteelblue;
+
+}
+
+    .anim-container {
+      font-weight: 800;
+      font-size: 8em;
+      color: black;
+      opacity: 1;
+
+    }
+
+    .anim-container svg {
+      width: 90%;
+      display: block;
+      top: 50%;
+      margin: -8% 0 0 5%;
+      position: fixed;
+    } */
+
+
+
+
+p {
+  font-size: medium;
+  font-weight: normal;
+  color: darkslategray;
+}
+
+h1, h2 {
+  color: darkslategray;
+}
+
+h2 {
+  font-size: x-large;
+  text-align: center;
+}
+
+h4 {
+  font-size: large;
+  font-weight: normal;
+  color: darkslategray;
+}
+
+h5 {
+  font-size: x-small;
+  font-weight: bold;
+  color: darkslategray;
+}
+
+ul {
+  color:darkslategray;
+}
+
+
+.article {
+
+  width: 100%;
+}
+
+/* .twin1 {
+  width: 50%;
+  padding: 1em;
+  float: left;
+}
+
+
+.twin2 {
+  width: 50%;
+  padding: 1em;
+  float: right;
+} */
+
+.twins {
+  width: 50%;
+ 
+  float: left;
+
+}
+
+.twins {
+  line-height: 1.2rem;
+}
+
+
+/* .twin2 {
+  width: 50%;
+  padding: 1em;
+  border: 1px solid rgb(78, 47, 47);
+  float: right;
+} */

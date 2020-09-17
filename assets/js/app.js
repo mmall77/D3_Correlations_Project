@@ -1,33 +1,31 @@
-//
 
 // wrapper for responsive graph resize
 function responsiveWrapper() {
 
-  var svgArea = d3.select('body').select('svg')
-
-//  clear SVG
-  if (!svgArea.empty()) {
-    svgArea.remove()
-  }
+    var svgArea = d3.select('body')
+    .select('svg')
+    if (!svgArea.empty()) {
+      svgArea.remove()
+    };
 
 
   // Define SVG area dimensions
-  var svgWidth = 980
-  var svgHeight = 620
+    var svgWidth = 980
+    var svgHeight = 620
 
-  // Define the chart's margins as an object
-  var chartMargin = {
-    top: 20,
-    right: 40,
-    bottom: 100,
-    left: 100
-  };
+  // chart margin object
+    var chartMargin = {
+      top: 20,
+      right: 40,
+      bottom: 100,
+      left: 100
+    };
 
-  // Define dimensions of the chart area
+  // set chart area dims
   var chartWidth = svgWidth - chartMargin.left - chartMargin.right
   var chartHeight = svgHeight - chartMargin.top - chartMargin.bottom
 
-  // Select body, append SVG area to it, and set the dimensions
+  // Select append SVG area to it, and set the dimensions
   var svg = d3
     .select('#scatter')
     .append('svg')
@@ -57,6 +55,8 @@ function responsiveWrapper() {
     return xLinearScale;
   };
 
+
+
   // func to update yScale labels when clicked
   function yScale (healthData, yValue) {
     // func to set the y axis scale of the chart
@@ -77,8 +77,8 @@ function responsiveWrapper() {
       .transition()
       .duration(1500)
       .call(bottomAxis)
-    return xAxis
-  }
+    return xAxis;
+  };
 
   // Func to update yAxis when axis label is clicked
   function updateYAxes (newYScale, yAxis) {
@@ -90,7 +90,7 @@ function responsiveWrapper() {
     return yAxis;
   };
 
-  // update circles + transition to new circles
+  // update circles + transition
   function renderCircles (
     circlesGroup, 
     newXScale, 
@@ -120,7 +120,7 @@ function responsiveWrapper() {
       .attr('x', d => newXScale(d[xValue]))
       .attr('y', d => newYScale(d[yValue]))
       .attr('text-anchor', 'middle') 
-    return textGroup
+    return textGroup;
   };
 
     //  Update tooltips for circle gp
@@ -130,7 +130,7 @@ function responsiveWrapper() {
       } else if (xValue === 'age') {
         var xLabel = 'Age (median)'
       } else {
-        var xLabel = 'Income (median)'
+        var xLabel = 'Income (median) $'
       }
       if (yValue === 'healthcare') {
         var yLabel = 'Lacks Healthcare (%)'
@@ -213,7 +213,7 @@ function responsiveWrapper() {
       .attr('cy', d => yLinearScale(d[yValue]))
       .attr('class', 'stateCircle')
       .attr('r', 12)
-      .attr('opacity', '0.70')
+      .attr('opacity', '0.30')
 
       //  text appended to circles
       var textGroup = chartGroup
@@ -227,8 +227,7 @@ function responsiveWrapper() {
         .attr('class', 'stateText')
         .attr('font-size', '12px')
         .attr('text-anchor', 'middle')
-        // .attr('fill', 'grey')
-        .attr('dy', '.3em')
+        .attr('dy', '.4em')
 
     
     // Additional gp x axis labels
@@ -249,7 +248,7 @@ function responsiveWrapper() {
       .append('text')
       .attr('x', 0)
       .attr('y', 40)
-      // for event listenter
+    //
       .attr('value', 'age')
       .classed('inactive', true)
       .text('Age (median)')
@@ -268,7 +267,7 @@ function responsiveWrapper() {
       .append('g')
       .attr('transform', `translate(-20, ${chartHeight / 2})`)
 
-    // Append yAxis
+    // Append y
     var hcLabel = yLabelsGp
       .append('text')
       .attr('transform', 'rotate(-90)')
@@ -278,7 +277,7 @@ function responsiveWrapper() {
       .attr('dy', '1em')
       .classed('axis-text', true)
       .classed('active', true)
-      .text('Lacks Healthcare (%)')
+      .text('Lack of Healthcare (%)')
 
     var smkLabel = yLabelsGp
       .append('text')
@@ -289,7 +288,7 @@ function responsiveWrapper() {
       .attr('dy', '1em')
       .classed('axis-text', true)
       .classed('inactive', true)
-      .text('Smokes (%)')
+      .text('Smoker (%)')
 
     var obsLabel = yLabelsGp
       .append('text')
@@ -342,8 +341,8 @@ function responsiveWrapper() {
         )
         if (xValue === 'poverty') {
           povLabel.classed('active', true).classed('inactive', false)
-          ageLabel.classed('active', true).classed('inactive', false)
-          incLabel.classed('active', true).classed('inactive', false)
+          ageLabel.classed('active', false).classed('inactive', true)
+          incLabel.classed('active', false).classed('inactive', true)
         } else if (xValue === 'age') {
           povLabel.classed('active', false).classed('inactive', true)
           ageLabel.classed('active', true).classed('inactive', false)
@@ -358,15 +357,10 @@ function responsiveWrapper() {
     
 
     yLabelsGp.selectAll('text').on('click', function () {
-
       var value = d3.select(this).attr('value')
-
       if (value !== yValue) {
-
         yValue = value
-
         yLinearScale = yScale(healthData, yValue)
-
         yAxis = updateYAxes(yLinearScale, yAxis)
 
         circlesGroup = renderCircles(
@@ -413,7 +407,15 @@ function responsiveWrapper() {
 responsiveWrapper()
 
 // call wrapper when window resized
-d3.select(window).on('resize', makeResponsive)
+d3.select(window).on('resize', responsiveWrapper)
 
 
+   
+
+
+
+
+
+
+     
 

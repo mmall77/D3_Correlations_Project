@@ -1,31 +1,177 @@
-.iframeContainer {
-  padding: 20px;
-  border: 1px solid #e3e3e3;
+:root {
+  font-family: Arial, Helvetica, sans-serif;
 }
 
-/* Sticky Footer rules (https://getbootstrap.com/examples/sticky-footer/) */
-html {
-  position: relative;
-  min-height: 100%;
-}
 
 body {
-  /* Padding bottom by footer height */
-  padding-bottom: 80px;
+    background-color: lightslategray;
 }
 
-#footer {
-  position: absolute;
-  bottom: 0;
-  width: 100%; /* Set the fixed height of the footer here */
-  height: 10px;
-  padding-top: 20px;
-  padding-bottom: 40px;
-  text-align: center;
-  background-color: #f5f5f5;
+.container {
+    margin: auto;
 }
 
-#footer p {
+/* @import url(https://fonts.googleapis.com/css?family=Open+Sans:800);
+#s-text {
+  height: .8em;
+  margin-bottom: .2em;
+  font-family: 'Arial, Helvetica, sans-serif';
+  overflow: hidden;
+}
+
+.anim-container {
+    margin: 120px;
+    opacity: 1; 
+}
+
+    .anim-container svg { 
+      width: 50%;
+      display: block;
+      top: 0%;
+      margin: 0% 0 0 0%;
+      position: fixed;
+      background-color: coral;
+} */
+/* 
+.text {
+  font: 1em/1 open sans, Impact;
+  text-transform: uppercase;
   margin: 0;
-  font-size: 16px;
+  fill: none;
+  stroke-width: 3;
+  stroke-linejoin: round;
+  stroke-dasharray: 70 330;
+  stroke-dashoffset: 0;
+  -webkit-animation: stroke 6s infinite linear;
+  animation: stroke 6s inifinite linear;
 }
+.text:nth-child(5n +1){
+  stroke: darkslategray;
+  -webkit-animation-delay: -1.25;
+  animation-delay: -1.2s;
+}
+.text:nth-child(5n +2){
+  stroke: lightcoral;
+  -webkit-animation-delay: -2.45s;
+  animation-delay: -2.4s;
+}
+
+
+@-webkit-keyframes stroke {
+  100% {
+    stroke-dashoffset: -400;
+  }
+}
+
+@keyframes stroke {
+  100% {
+    stroke-dashoffset: -400;
+  }
+} */
+
+/* svg {
+  position: absolute;
+  width: 100%;
+  height:100%;
+} */
+
+.parent {
+  margin: auto;
+  width: 100%;
+  border: 0px;
+  float: left;
+  padding: 0px;
+  background: lightsteelblue;
+}
+
+
+
+.image {
+  position: relative;
+  display: block;
+  margin: auto;
+  width: 93%; 
+  padding-bottom: 1em;
+} 
+
+
+
+.child {
+  width: 100%;
+  margin: auto;
+  height: 620px;
+}
+
+#scatter {
+  background-color: lightsteelblue;
+  width: 100%;
+  margin: auto;
+  padding-bottom: 20px; 
+}
+
+.blurb-title {
+    background-color: lightsteelblue;
+    width: 100%;
+    margin: auto;
+    height: 30px; 
+    padding-top: 1%;
+
+}
+
+.twins {
+  width: 50%;
+  padding: 2em;
+  float: left;
+}
+
+.stepchild {
+  width: 98%;
+  padding: 0em;
+  border: 1em;
+  float: left;
+}
+
+h2 {
+  font-size: x-large;
+  text-align: center;
+}
+
+
+h3 {
+    font-size: x-large;
+    font-weight: bold;
+    color: darkslategrey;
+}
+
+h5 {
+  font-size: x-small;
+  font-weight: bold;
+  color: darkslategrey;
+  text-align: center
+}
+
+p {
+    font-size: small;
+    color: darkslategray;
+}
+
+
+
+.main-img {
+  width: 100%;
+  height: auto;
+}
+
+
+
+
+
+nav .navbar-nav li a {
+  color: rgb(78, 47, 47) !important;
+
+}
+
+.navbar {
+  background: blanchedalmond;
+}
+

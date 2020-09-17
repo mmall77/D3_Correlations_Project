@@ -3,61 +3,83 @@
 
 <head>
   <meta charset="UTF-8">
-  <title>D3Times</title>
-  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
-  <link rel="stylesheet" href="assets/css/style.css">
-  <link rel="stylesheet" href="assets/css/d3Style.css">
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <meta http-equiv="x-ua-compatible" content="ie=edge">
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous" />
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous" />
+  <link rel="stylesheet" href="assets/css/style.css" />
+  <link rel="stylesheet" href="assets/css/d3Style.css" />
 
+
+  <title>D3 - Correlations</title>
 </head>
 
 <body>
+
   <div class="container">
-    <div class="row">
-      <div class="col-xs-12 col-md-12">
-        <!-- <h1>D3Times</h1> -->
-        <img src="assets/images/header.png" alt="D3 Times">
-      </div>
-    </div>
-    <div class="row">
-      <div class="col-xs-12  col-md-9">
-        <div id="scatter">
-          <!-- We append our chart here. -->
-        </div>
-      </div>
-    </div>
-    <div class="row">
-      <div class="col-xs-12  col-md-12">
-        <div class="article">
-          <h2>Correlations Discovered Between Health Risks and Age, Income</h2>
-          <p>The data shows that there is a negative correlation between income and smoking. The higher the income the lower incidence of smoking. 
-            Smoking skews to an older age group from the data. As income decreases smoking tendencies tend to increase. 
-            It seems also the preponderance of the smoking habit is in the southern US. Obesity also shows a negative correlation. Obesity goes
-          down as income increases. Not surprisingly, the northeastern states in general have the highest income per capita and less obesity and in the 
-          southern states with their depressed economies there are more overweight people. It would be interesting to add in education level to see how that affects 
-          obesity and smoking. We would need to add in an extra dataset to see how that affects this chart.</p>
 
-          <p>There is a correlation between median incomes per capita and level of health coverage. MA seems to have 
-            one of the highest per capita median incomes with the lowest incidence of people without healthcare. MS has the lowest 
-            per capita income of all the states and a high incidence of people without healthcare. TX has a middling income per capita 
-            but the highest incidence of non health coverage. The positive relation between poverty and healthcare is the most striking. 
-            All the southern states are well represented with high levels of poverty and lack of healthcare. There's nothing new under the sun.</p>
+    <div class="col-sm-12 col-lg-12">
+      <row>
+        
 
-          <p></p>
+        <div class="parent">
+       
+          <div class="image"><img src="assets/images/header2.png" /></div>
+          
+          
+          <div class="child" id="scatter"></div>
+
+
+          <div class="blurb-title">
+            <h2>
+              Correlations Between Income, Age, Access to Healthcare and Other Factors
+            </h2>
+          </div>
+          <div class="twins">
+            <h4>Negative Correlations</h4>
+            <p class="text">
+            <ul>
+              <li>Income vs lack of healthcare</li>
+              <li>The higher the income the lower incidence of smoking</li>
+              <li>The higher the income the lower the incidence of obesity</li>
+            </ul>
+            </p>
+
+
+            <h4>Positive Correlations</h4>
+            <p class="text">
+            <ul>
+              <li>Percent of poverty vs. lack of healthcare</li>
+              <li>Poverty vs. both obesity and smoking </li>
+              <li>Age vs. both smoking and obesity</li>
+            </ul>
+            </p>
+          </div>
+          <div class="twins">
+            <p>The smoking habit is preponderant in the southern US. Obesity also flourishes in the South .
+              Not surprisingly, the northeastern states in general have the highest income per capita and less obesity and smoking.
+              There is a correlation between median incomes per capita and level of health coverage. MA seems to have
+              one of the highest per capita median incomes with the lowest incidence of people without healthcare. MS has the lowest
+              per capita income of all the states and a high incidence of people without healthcare. TX has a middling income per capita
+              but the highest incidence of non health coverage. The positive relation between poverty and healthcare is the most striking.
+              All the southern states are well represented with high levels of poverty and lack of healthcare. </p>
+          </div>
+          <div class="stepchild">
+            <h5>&#169; hellbilly.datacorp.2020</h5>
+          </div>
         </div>
-      </div>
+      </row>
     </div>
   </div>
 
-  <!-- Footer-->
-  <div id="footer">
-    <p></p>
-  </div>
+
   <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js" integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49" crossorigin="anonymous"></script>
   <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js" integrity="sha384-ChfqqxuZUCnJSK3+MXmPNIyE6ZbWh2IMqE241rYiqJxyMiZ6OW/JmZQ5stwEULTy" crossorigin="anonymous"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/d3-tip/0.9.1/d3-tip.js"></script>
   <script src="https://d3js.org/d3.v5.min.js"></script>
   <script type="text/javascript" src="assets/js/app.js"></script>
+
 
 </body>
 
