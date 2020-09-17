@@ -3,15 +3,29 @@
 function responsiveWrapper() {
 
     var svgArea = d3.select('body')
-    .select('svg')
+      .select('svg');
     if (!svgArea.empty()) {
-      svgArea.remove()
+      svgArea.remove();
     };
+
+// function responsivefy(svg) {
+//     // get container + svg aspect ratio
+//     var container = d3.select(svg.node().parentNode),
+//         width = parseInt(svg.style("width")),
+//         height = parseInt(svg.style("height")),
+//         aspect = width / height;
+
+//     // add viewBox and preserveAspectRatio properties,
+//     // and call resize so that svg resizes on inital page load
+//     svg.attr("viewBox", "0 0 " + width + " " + height)
+//         .attr("perserveAspectRatio", "xMinYMid")
+//         .call(resize);
+
 
 
   // Define SVG area dimensions
-    var svgWidth = 980
-    var svgHeight = 620
+    var svgWidth = 980;
+    var svgHeight = 620;
 
   // chart margin object
     var chartMargin = {
@@ -31,8 +45,9 @@ function responsiveWrapper() {
     .append('svg')
     .attr('height', svgHeight)
     .attr('width', svgWidth)
+   
 
-  // Append a group to the SVG area and shift ('translate') it to the right and down to adhere
+  // Append a group to the SVG area and shift it to the right and down to adhere
   // to the margins set in the "chartMargin" object.
   var chartGroup = svg
     .append('g')
@@ -126,18 +141,18 @@ function responsiveWrapper() {
     //  Update tooltips for circle gp
     function updateToolTip (xValue, yValue, circlesGroup, textGroup) {
       if (xValue === 'poverty') {
-        var xLabel = 'Poverty (%)'
+        var xLabel = 'Poverty (%)';
       } else if (xValue === 'age') {
-        var xLabel = 'Age (median)'
+        var xLabel = 'Age (median)';
       } else {
-        var xLabel = 'Income (median) $'
+        var xLabel = 'Income (median) $';
       }
       if (yValue === 'healthcare') {
-        var yLabel = 'Lacks Healthcare (%)'
+        var yLabel = 'Lacks Healthcare (%)';
       } else if (yValue === 'obesity') {
-        var yLabel = 'Obesity (%)'
+        var yLabel = 'Obesity (%)';
       } else {
-        var yLabel = 'Smokers (%)'
+        var yLabel = 'Smokers (%)';
       }
 
       // Create tooltips
@@ -146,7 +161,7 @@ function responsiveWrapper() {
         .offset([90, 90])
         .html(function (d) {
           return `<strong>${d.abbr}</strong><br>${xLabel} ${d[xValue]}<br>${yLabel} ${d[yValue]}`
-        })
+        });
       
       // circles tooltips with event listeners 
       circlesGroup.call(tool_tip)
@@ -166,42 +181,42 @@ function responsiveWrapper() {
         .on('mouseout', function (data) {
           tool_tip.hide(data)
         })
-      return circlesGroup
-    };
+      return circlesGroup;
+    }
 
     //read in the data from data.csv
 
   d3.csv('assets/data/data.csv').then(function (healthData) {
     healthData.forEach(function (data) {
-      data.poverty = +data.poverty
-      data.age = +data.age
-      data.income = +data.income
-      data.healthcare = +data.healthcare
-      data.obesity = +data.obesity
-      data.smokes = +data.smokes
-    })
-    console.log(healthData);
+      data.poverty = +data.poverty;
+      data.age = +data.age;
+      data.income = +data.income;
+      data.healthcare = +data.healthcare;
+      data.obesity = +data.obesity;
+      data.smokes = +data.smokes;
+    });
+    // console.log(healthData);
 
     // x and y linear scale funcs for the chart
-    var xLinearScale = xScale(healthData, xValue)
-    var yLinearScale = yScale(healthData, yValue)
+    var xLinearScale = xScale(healthData, xValue);
+    var yLinearScale = yScale(healthData, yValue);
 
     //
-    var bottomAxis = d3.axisBottom(xLinearScale)
-    var leftAxis = d3.axisLeft(yLinearScale)
+    var bottomAxis = d3.axisBottom(xLinearScale);
+    var leftAxis = d3.axisLeft(yLinearScale);
 
     // append x axis to chart
     var xAxis = chartGroup
       .append('g')
       .classed('x-axis', true)
       .attr('transform', `translate(0, ${chartHeight})`)
-      .call(bottomAxis)
+      .call(bottomAxis);
     
     // append y axis
     var yAxis = chartGroup
       .append('g')
       .classed('y-axis', true)
-      .call(leftAxis)
+      .call(leftAxis);
 
     // initial circles created and appended
     var circlesGroup = chartGroup
@@ -213,7 +228,7 @@ function responsiveWrapper() {
       .attr('cy', d => yLinearScale(d[yValue]))
       .attr('class', 'stateCircle')
       .attr('r', 12)
-      .attr('opacity', '0.30')
+      .attr('opacity', '0.30');
 
       //  text appended to circles
       var textGroup = chartGroup
@@ -227,13 +242,13 @@ function responsiveWrapper() {
         .attr('class', 'stateText')
         .attr('font-size', '12px')
         .attr('text-anchor', 'middle')
-        .attr('dy', '.4em')
+        .attr('dy', '.4em');
 
     
     // Additional gp x axis labels
     var xLabelsGp = chartGroup
     .append('g')
-    .attr('transform', `translate(${chartWidth /2}, ${chartHeight + 20})`)
+    .attr('transform', `translate(${chartWidth /2}, ${chartHeight + 20})`);
 
     var povLabel = xLabelsGp
       .append('text')
@@ -242,30 +257,28 @@ function responsiveWrapper() {
       // for event listener
       .attr('value', 'poverty')
       .classed('active', true)
-      .text('Poverty (%)')
+      .text('Poverty (%)');
 
     var ageLabel = xLabelsGp
       .append('text')
       .attr('x', 0)
       .attr('y', 40)
-    //
       .attr('value', 'age')
       .classed('inactive', true)
-      .text('Age (median)')
+      .text('Age (median)');
 
     var incLabel = xLabelsGp
       .append('text')
       .attr('x', 0)
       .attr('y', 60)
-      //
       .attr('value', 'income')
       .classed('inactive', true)
-      .text('Income (median)')     
+      .text('Income (median)');    
 
     // y axis gps
     var yLabelsGp = chartGroup
       .append('g')
-      .attr('transform', `translate(-20, ${chartHeight / 2})`)
+      .attr('transform', `translate(-20, ${chartHeight / 2})`);
 
     // Append y
     var hcLabel = yLabelsGp
@@ -277,7 +290,7 @@ function responsiveWrapper() {
       .attr('dy', '1em')
       .classed('axis-text', true)
       .classed('active', true)
-      .text('Lack of Healthcare (%)')
+      .text('Lack of Healthcare (%)');
 
     var smkLabel = yLabelsGp
       .append('text')
@@ -288,7 +301,7 @@ function responsiveWrapper() {
       .attr('dy', '1em')
       .classed('axis-text', true)
       .classed('inactive', true)
-      .text('Smoker (%)')
+      .text('Smoker (%)');
 
     var obsLabel = yLabelsGp
       .append('text')
@@ -299,7 +312,7 @@ function responsiveWrapper() {
       .attr('dy', '1em')
       .classed('axis-text', true)
       .classed('inactive', true)
-      .text('Obesity (%)')
+      .text('Obesity (%)');
     
       // tooltip update
       var circlesGroup = updateToolTip(
@@ -307,15 +320,15 @@ function responsiveWrapper() {
         yValue,
         circlesGroup,
         textGroup
-      )
+      );
 
       //Event listener for x axis labels
     xLabelsGp.selectAll('text').on('click', function () {
       var value = d3.select(this).attr('value')
       if (value !== xValue) {
-          xValue = value
-          xLinearScale = xScale(healthData, xValue)
-          xAxis = updateXAxes(xLinearScale, xAxis)
+          xValue = value;
+          xLinearScale = xScale(healthData, xValue);
+          xAxis = updateXAxes(xLinearScale, xAxis);
 
         circlesGroup = renderCircles(
           circlesGroup,
@@ -323,7 +336,7 @@ function responsiveWrapper() {
           xValue,
           yLinearScale,
           yValue
-        )
+        );
 
         textGroup = renderText(
           textGroup,
@@ -331,37 +344,38 @@ function responsiveWrapper() {
           xValue,
           yLinearScale,
           yValue
-        )
+        );
 
         circlesGroup = updateToolTip(
           xValue,
           yValue,
           circlesGroup,
           textGroup
-        )
+        );
+
         if (xValue === 'poverty') {
-          povLabel.classed('active', true).classed('inactive', false)
-          ageLabel.classed('active', false).classed('inactive', true)
-          incLabel.classed('active', false).classed('inactive', true)
+          povLabel.classed('active', true).classed('inactive', false);
+          ageLabel.classed('active', false).classed('inactive', true);
+          incLabel.classed('active', false).classed('inactive', true);
         } else if (xValue === 'age') {
-          povLabel.classed('active', false).classed('inactive', true)
-          ageLabel.classed('active', true).classed('inactive', false)
-          incLabel.classed('active', false).classed('inactive', true)
+          povLabel.classed('active', false).classed('inactive', true);
+          ageLabel.classed('active', true).classed('inactive', false);
+          incLabel.classed('active', false).classed('inactive', true);
         } else {
-          povLabel.classed('active', false).classed('inactive', true)
-          ageLabel.classed('active', false).classed('inactive', true)
-          incLabel.classed('active', true).classed('inactive', false)
+          povLabel.classed('active', false).classed('inactive', true);
+          ageLabel.classed('active', false).classed('inactive', true);
+          incLabel.classed('active', true).classed('inactive', false);
         }
       }
     })
     
 
     yLabelsGp.selectAll('text').on('click', function () {
-      var value = d3.select(this).attr('value')
+      var value = d3.select(this).attr('value');
       if (value !== yValue) {
-        yValue = value
-        yLinearScale = yScale(healthData, yValue)
-        yAxis = updateYAxes(yLinearScale, yAxis)
+        yValue = value;
+        yLinearScale = yScale(healthData, yValue);
+        yAxis = updateYAxes(yLinearScale, yAxis);
 
         circlesGroup = renderCircles(
           circlesGroup,
@@ -369,7 +383,7 @@ function responsiveWrapper() {
           xValue,
           yLinearScale,
           yValue
-        )
+        );
         // Updates Text with New Values
         textGroup = renderText(
           textGroup,
@@ -377,37 +391,37 @@ function responsiveWrapper() {
           xValue,
           yLinearScale,
           yValue
-        )
+        );
         // Updates Tooltips with New Information
         circlesGroup = updateToolTip(
           xValue,
           yValue,
           circlesGroup,
           textGroup
-        )
+        );
         
         if (yValue === 'healthcare') {
-          hcLabel.classed('active', true).classed('inactive', false)
-          obsLabel.classed('active', false).classed('inactive', true)
-          smkLabel.classed('active', false).classed('inactive', true)
+          hcLabel.classed('active', true).classed('inactive', false);
+          obsLabel.classed('active', false).classed('inactive', true);
+          smkLabel.classed('active', false).classed('inactive', true);
         } else if (yValue === 'obesity') {
-          hcLabel.classed('active', false).classed('inactive', true)
-          obsLabel.classed('active', true).classed('inactive', false)
-          incLabel.classed('active', false).classed('inactive', true)
+          hcLabel.classed('active', false).classed('inactive', true);
+          obsLabel.classed('active', true).classed('inactive', false);
+          incLabel.classed('active', false).classed('inactive', true);
         } else {
-          hcLabel.classed('active', false).classed('inactive', true)
-          obsLabel.classed('active', false).classed('inactive', true)
-          smkLabel.classed('active', true).classed('inactive', false)
+          hcLabel.classed('active', false).classed('inactive', true);
+          obsLabel.classed('active', false).classed('inactive', true);
+          smkLabel.classed('active', true).classed('inactive', false);
         }
 
       }
     })
   })
 }
-responsiveWrapper()
-
+responsiveWrapper();
 // call wrapper when window resized
-d3.select(window).on('resize', responsiveWrapper)
+d3.select(window)
+  .on('resize', responsiveWrapper);
 
 
    

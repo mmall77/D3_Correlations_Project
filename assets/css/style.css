@@ -94,6 +94,10 @@ body {
   padding-bottom: 1em;
 } 
 
+.img-responsive {
+  max-width: 100%;
+  height: auto;
+}
 
 
 .child {
